@@ -1,18 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions, useMicrophonePermissions } from 'expo-camera';
 
 export default function App() {
-  const [permission, requestPermission] = useCameraPermissions();
+  const [cameraPermission, requestCameraPermission] = useCameraPermissions();
+  const [microphonePermission, requestMicrophonePermission] = useMicrophonePermissions();
   const cameraRef = useRef<CameraView | null>(null);
   const [recordStarted, setRecordStarted] = useState(false);
 
   // Ask for camera permission on mount
   useEffect(() => {
-    if (!permission) {
-      requestPermission();
+    if (!cameraPermission?.granted) {
+      requestCameraPermission();
     }
-  }, [permission, requestPermission]);
+    if (!microphonePermission?.granted) {
+      requestMicrophonePermission();
+    }
+  }, [cameraPermission, requestCameraPermission, microphonePermission, requestMicrophonePermission]);
 
   const [cameraReady, setCameraReady] = useState(false);
 
@@ -38,7 +42,7 @@ export default function App() {
     }
   }, [cameraReady]);  
 
-  if (!permission || !permission.granted) {
+  if (!cameraPermission || !cameraPermission.granted) {
     // You might want to display some UI prompting the user – keep it minimal for demo.
     return <View style={styles.container} />;
   }

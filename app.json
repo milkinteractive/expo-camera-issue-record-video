@@ -17,7 +17,8 @@
       "bundleIdentifier": "com.yakitz.expocameraissuerecordvideo",
       "appleTeamId": "4X2K65LNZ3",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone",
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera when you want to record a video or take a picture. We then provide the user an analysis of his face by extracting emotion and face orientation."
       }
     },
     "android": {
@@ -27,8 +28,8 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
-        "CAMERA",
-        "RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA"
       ],
       "package": "com.yakitz.expocameraissuerecordvideo"
     },
